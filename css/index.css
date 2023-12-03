@@ -1,0 +1,217 @@
+.container{
+    width: 1190px;
+    margin: 0 auto;
+}
+/* #region顶部导航条 */
+
+.topbar{
+height: 30px;
+background-color: #ECECEC;
+}
+.welcome{
+    font-size: 0;
+    font-weight: bold;
+}
+.welcome span,.welcome a{
+    font-size: 12px;
+    line-height: 30px;
+    color: #666666;
+}
+.welcome .hello{  
+    font-weight: normal;
+    margin-right: 28px;
+}
+.welcome .login{
+    padding-right: 10px;
+    border-right: 1px solid#666666;
+}
+.welcome .register{
+    padding-left: 10px;
+}
+.topbar-nav .list{
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+}
+.topbar-nav .list li{
+    float: left;
+}
+.topbar-nav .list a{
+    padding: 0 15px;
+    color: #666666;
+    border-right: 1px solid#666666;
+}
+.topbar-nav .list li:first-child{
+    padding-left: 0;
+}
+.topbar-nav .list li:last-child a{
+    border: 0;
+    padding-right: 0;
+}
+/* #endregion顶部导航条 */
+/* #region搜索区 */
+.header{
+    height: 120px;
+}
+.logo{
+    width: 400px;
+}
+.logo img{
+    padding-left: 0px;
+    transition: padding-left 3s;
+}
+.logo :hover{
+    padding-left: 545px;
+}
+.search form{
+    height: 36px;
+    margin-top: 42px;
+    font-size: 0;
+}
+.search input{
+    width: 508px;
+    height: 34px;
+    border: 1px solid #007BFF;
+    vertical-align: top;
+}
+.search button{
+    width: 80px;
+    height: 36px;
+    background-color: #007BFF;
+    background-image: url('../images/serch_icon.png');
+    background-repeat: no-repeat;
+    background-position: 28px 6px;
+}
+/* #endregion搜索区 */
+/* #region头部导航区 */
+.mainnav{
+    height: 48px;
+    border-bottom: 1px solid #007BFF;
+}
+.alltypes{
+    height: 48px;
+    width: 190px;
+    font-size: 16px;
+    background-color: #007BFF;
+    text-align: center;
+    line-height: 48px;
+    color: white;
+}
+.mainnav .container .list{
+    height: 48px;
+}
+.mainnav .container .list li{
+    line-height: 48px;
+    vertical-align: top;
+    float:left;
+    font-size: 16px;
+    margin: 0 10px;
+} 
+.mainnav .container .list a{
+    color: #333333;
+    font-weight: bold;
+}
+/* #endregion头部导航区 */
+/* #region侧边导航区 */
+
+.main-content {
+    margin-top: 10px;
+}
+.main-content .slide-nav {
+    width: 190px;
+    height: 458px;
+    background-color: #F4F4F4;
+}
+.main-content .slide-nav li {
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 16px;
+}
+.main-content .slide-nav li:hover {
+    background-color: #007BFF;
+}
+.main-content .slide-nav li:hover a {
+    color: white;
+}
+.main-content .slide-other {
+    width: 290px;
+    height: 458px;
+    background-color: orange;
+}
+
+/* #endregion侧边导航区*/
+/* #region商品推荐区 */
+.main-content .recommend {
+    width: 690px;
+    height: 458px;
+    margin: 0 10px;
+}
+.recommend div{
+    background-color: white;
+    float: left;
+    width: 205px;
+    height: 210px;
+    border-radius: 25px;
+    margin: 10px 20px;
+    margin-right: 0;
+    transition: margin-top 1s;
+}
+.recommend1{
+    background-image: url('../images/recommend1.jpg');
+    background-size: cover;
+}
+.recommend2{
+    background-image: url('../images/recommend2.jpg');
+    background-size: cover;
+
+}
+.recommend3{
+    background-image: url('../images/recommend3.jpg');
+    background-size: cover;
+
+}
+.recommend4{
+    background-image: url('../images/recommend4.jpg');
+    background-size: cover;
+    clear:both;
+}
+.recommend5{
+    background-image: url('../images/recommend5.jpg');
+    background-size: cover;
+}
+.recommend6{
+    background-image: url('../images/recommend6.jpg');
+    background-size: cover;
+}
+.recommend :hover{
+    margin-top: 0px;
+}
+/* #endregion商品推荐区 */
+/* #region日历卡片 */
+.bottom{
+    height: 200px;
+}
+.card{
+    margin-top: 10px;
+    width: 190px;
+    height: 190px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 10px 4px 8px 0 rgba(0, 0, 0, 0.2),10px 20px 20px 0 rgba(0, 0, 0, 0.18);
+}
+.card .header{
+    width: 190px;
+    height: 150px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 65px;
+    line-height: 150px;
+}
+.card .date{
+    width: 190px;
+    height: 40px;
+    line-height: 40px;
+
+}
+/* #endregion日历卡片 */

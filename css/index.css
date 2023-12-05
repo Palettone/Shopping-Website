@@ -5,6 +5,7 @@
 /* #region顶部导航条 */
 
 .topbar{
+    width: 100%;
 height: 30px;
 background-color: #ECECEC;
 }

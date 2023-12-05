@@ -1,0 +1,214 @@
+<template>
+    <div class="topbar">
+        <div class="container clearfix">
+            <div class="welcome leftfix">
+                <span class="hello">购物城欢迎您</span>
+                <a href="#" class="back">回到首页</a>
+            </div>
+            <div class="topbar-nav rightfix">
+                <ul class="list clearfix">
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="#">我的购物车</a></li>
+                    <li><a href="#">企业采购</a></li>
+                    <li><a href="#">商家后台</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container clearfix">
+            <div class="logo leftfix">
+                <img src="../../../images/logo2.png" alt="购物城">
+            </div>
+            <div class="search rightfix">
+                <form action="#">
+                    <input type="text">
+                    <button></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="message">
+        <div class="container clearfix">
+            <a class="all-products leftfix" href="#">全部商品</a>
+            <div class="address rightfix">
+                <span>配送至：</span>
+                <form class="rightfix" vaction="#">
+                <input type="text">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cart">
+        <div class="cart-head">
+            <div class="cart-head-container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix">全选</div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品</div>
+                        </li>
+                        <li>
+                            <div class="price">单价</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix">操作</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cart-body">
+            <div class="container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix"></div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品名</div>
+                        </li>
+                        <li>
+                            <div class="price">￥60.00</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix"><a href="#">删除</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix"></div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品名</div>
+                        </li>
+                        <li>
+                            <div class="price">￥60.00</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix"><a href="#">删除</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix"></div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品名</div>
+                        </li>
+                        <li>
+                            <div class="price">￥60.00</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix"><a href="#">删除</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix"></div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品名</div>
+                        </li>
+                        <li>
+                            <div class="price">￥60.00</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix"><a href="#">删除</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix"></div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品名</div>
+                        </li>
+                        <li>
+                            <div class="price">￥60.00</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix"><a href="#">删除</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="container">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix">全选</div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">
+                                <a href="#">清理购物车</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price"><span>总价：</span>￥60.00</div>
+                        </li>
+                        <li>
+                            <div class="delete">
+                                <button>去结算</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+@import '../../../css/reset.css';
+@import '../../../css/cart.css';
+</style>

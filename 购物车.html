@@ -7,13 +7,15 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/cart.css">
+
 </head>
 <body>
+    <script type="text/javascript" src="checkbox.js"></script>
     <div class="topbar">
         <div class="container clearfix">
             <div class="welcome leftfix">
                 <span class="hello">购物城欢迎您</span>
-                <a href="#" class="back">回到首页</a>
+                <a href="C:\Users\Palettone\Desktop\Projects\Shopping-Website\购物城.html" class="back">回到首页</a>
             </div>
             <div class="topbar-nav rightfix">
                 <ul class="list clearfix">
@@ -51,11 +53,11 @@
 
     </div>
 
-    <div class="cart">
+    <div class="cart" id="cart">
         <div class="cart-head">
             <div class="cart-head-container clearfix">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" id="checkAll1">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -66,7 +68,7 @@
                             <div class="goods-name leftfix">商品</div>
                         </li>
                         <li>
-                            <div class="price">单价</div>
+                            <div class="price">单价（￥）</div>
                         </li>
                         <li>
                             <div class="delete leftfix">操作</div>
@@ -75,10 +77,10 @@
                 </div>
             </div>
         </div>
-        <div class="cart-body">
+        <div class="cart-body" id="cartbody">
             <div class="container clearfix">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" name="item">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -89,7 +91,7 @@
                             <div class="goods-name leftfix">商品名</div>
                         </li>
                         <li>
-                            <div class="price">￥60.00</div>
+                            <div class="price">60.00</div>
                         </li>
                         <li>
                             <div class="delete leftfix"><a href="#">删除</a></div>
@@ -100,7 +102,7 @@
             </div>
             <div class="container clearfix">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" name="item">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -111,7 +113,7 @@
                             <div class="goods-name leftfix">商品名</div>
                         </li>
                         <li>
-                            <div class="price">￥60.00</div>
+                            <div class="price">60.00</div>
                         </li>
                         <li>
                             <div class="delete leftfix"><a href="#">删除</a></div>
@@ -122,7 +124,7 @@
             </div>
             <div class="container clearfix">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" name="item">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -133,7 +135,7 @@
                             <div class="goods-name leftfix">商品名</div>
                         </li>
                         <li>
-                            <div class="price">￥60.00</div>
+                            <div class="price">60.00</div>
                         </li>
                         <li>
                             <div class="delete leftfix"><a href="#">删除</a></div>
@@ -144,7 +146,7 @@
             </div>
             <div class="container clearfix">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" name="item">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -155,7 +157,7 @@
                             <div class="goods-name leftfix">商品名</div>
                         </li>
                         <li>
-                            <div class="price">￥60.00</div>
+                            <div class="price">60.00</div>
                         </li>
                         <li>
                             <div class="delete leftfix"><a href="#">删除</a></div>
@@ -166,7 +168,7 @@
             </div>
             <div class="container clearfix">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" name="item">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -177,7 +179,7 @@
                             <div class="goods-name leftfix">商品名</div>
                         </li>
                         <li>
-                            <div class="price">￥60.00</div>
+                            <div class="price">60.00</div>
                         </li>
                         <li>
                             <div class="delete leftfix"><a href="#">删除</a></div>
@@ -191,7 +193,7 @@
         <div class="footer">
             <div class="container">
                 <div class="cart-checkbox leftfix">
-                    <input type="checkbox">
+                    <input type="checkbox" id="checkAll">
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
@@ -204,7 +206,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="price"><span>总价：</span>￥60.00</div>
+                            <div class="price" id="totalprice"><span>总价：</span>￥60.00</div>
                         </li>
                         <li>
                             <div class="delete">
@@ -217,4 +219,30 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="checkbox.js"></script>
+<script>
+    var checks = document.querySelectorAll("div.cart-body>div.container>div.cart-checkbox > input");
+    var price = document.querySelectorAll("div.cart-body> div.container>div.list>ul>li>div.price");
+    var result = document.getElementById("totalprice");
+    var cart =document.querySelector("#cart")
+    function totalprice(){
+        let sum = 0.00;
+        for (let i = 0; i < checks.length; i++) {
+            if(checks[i].checked == true){
+                sum += (parseFloat(sum)+  parseFloat(price[i].innerText)).toFixed(2);
+            }
+        }
+        result.innerText = '总价：￥' + sum + '.00元';
+    }
+    window.onload = totalprice();
+    cart.onclick = function(){
+        let sum = 0.00;
+        for (let i = 0; i < checks.length; i++) {
+            if(checks[i].checked == true){
+                sum = (parseFloat(sum)+  parseFloat(price[i].innerText)).toFixed(2);
+            }
+        }
+        result.innerText = '总价：￥' + sum ;
+    }
+</script>
 </html>

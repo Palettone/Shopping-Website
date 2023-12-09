@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>购物车页面</title>
+    <link rel="stylesheet" href="css/buyer.css">
+</head>
+
+<body>
+<div id="app">
+    <div class="header">
+        <button @click="buy" class="type-button">购买</button>
+        <button @click="toExit" class="type-button">登出</button>
+    </div>
+    <template>
+    <div class="book-list">
+        <div class="book" v-for="book in books" :key="book.id">
+            <img :src="book.imgPath" alt="图片" class="book-image">
+            <div class="book-info">
+                <p class="book-name">{{ book.name }}</p>
+                <p class="book-number">购买数量: {{ book.count }}</p>
+                <p class="book-number">价格: {{ book.price }}</p>
+                <button @click="removeCart(book.id)" class="type-button">删除</button>
+            </div>
+        </div>
+    </div>
+    </template>
+</div>
+
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="axios-0.18.0.js"></script>
+<script>
+    new Vue({
+            el: '#app',
+            data: {
+                search: '',
+                books: [],
+            },
+            created() {
+                this.getAll()
+            },
+            methods: {
+                getAll(){
+                    axios.get("/cart").then((res)=>{
+                        this.books = res.data.data;
+                        //console.log(res.data.data)
+                    })
+                },
+                removeCart(id) {
+                    axios.delete("/cart/" + id).then((res)=>{
+                        alert(res.data.data)
+                        this.getAll()
+                    }).catch(function (error) {
+                        if (error.response.status === 400) {
+                            alert("未登录，自动跳转到登录页面！")
+                            window.location.href = 'login.html'
+                        }
+                    });
+                },
+                buy() {
+                    axios.get("/order").then((res)=>{
+                        if (res.data.success) {
+                            alert("下单成功！")
+                            window.location.href = 'buyer.html';
+                        } else {
+                            alert(res.data.errorMsg)
+                            this.getAll()
+                        }
+                    })
+                },
+                toExit() {
+                    window.location.href = 'login.html';
+                },
+            }
+         });
+</script>
+</body>
+</html>

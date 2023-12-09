@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>购买页面</title>
+    <link rel="stylesheet" href="css/buyer.css">
+</head>
+
+<body>
+<div id="app">
+    <div class="header">
+        <input v-model="search" placeholder="搜索商品名" class="search-input">
+        <button @click="getNeedId" class="type-button">搜索</button>
+        <button @click="toCart" class="type-button">打开购物车</button>
+        <button @click="toExit" class="type-button">登出</button>
+    </div>
+    <template>
+    <div class="book-list">
+        <div class="book" v-for="book in books" :key="book.id">
+            <img :src="book.imgPath" alt="图片" class="book-image">
+            <div class="book-info">
+                <p class="book-name">{{ book.name }}</p>
+                <p class="book-number">剩余数量: {{ book.count }}</p>
+                <p class="book-number">价格: {{ book.price }}</p>
+                <button @click="addCart(book.id)" class="type-button">加入购物车</button>
+            </div>
+        </div>
+    </div>
+    </template>
+</div>
+
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="axios-0.18.0.js"></script>
+<script>
+    new Vue({
+            el: '#app',
+            data: {
+                search: '',
+                books: [],
+            },
+            created() {
+                this.getAll()
+            },
+            methods: {
+                getAll(){
+                    axios.get("/item").then((res)=>{
+                        this.books = res.data.data;
+                        //console.log(res.data.data)
+                    })
+                },
+                getNeedId() {
+                    if (this.search !== ""){
+                        axios.get("/item/" + this.search).then((res) => {
+                            if (res.data.total === 0){
+                                alert("未找到任何商品！")
+                            } else {
+                                this.books = res.data.data;
+                            }
+                        })
+                    } else {
+                        alert("搜索内容不能为空！")
+                        axios.get("/item").then((res)=>{
+                            this.books = res.data.data;
+                        })
+                    }
+                },
+                addCart(id) {
+                    //console.log(id)
+                    axios.get("/cart/" + id).then((res)=>{
+                        alert(res.data.data)
+                    }).catch(function (error) {
+                        if (error.response.status === 400) {
+                            alert("未登录，自动跳转到登录页面！")
+                            window.location.href = 'login.html'
+                        }
+                    });
+                },
+                toCart() {
+                    window.location.href = 'cart.html';
+                },
+                toExit() {
+                    window.location.href = 'login.html';
+                },
+            }
+         });
+</script>
+</body>
+</html>

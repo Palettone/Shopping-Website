@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://8.138.108.248:3306/pink?useSSL=true&serverTimezone=UTC
+    username: pink
+    password: jZ58mZPtc7K82K48 # TODO 开源前修改
+  mail:
+    host: smtp.office365.com
+    port: 587
+    username: cuiyuxin2002@outlook.com
+    password: temppasswd1 # TODO 开源前修改
+    default-encoding: UTF-8
+    properties:
+      mail:
+#        debug: true
+        smtp:
+          starttls:
+            enable: true
+mybatis-plus:
+  type-aliases-package: palettone.shoppingwebsite.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+  global-config:
+    db-config:
+      id-type: auto
+      update-strategy: not_null
+      table-prefix: tb_
+server:
+  port: 18080

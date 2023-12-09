@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <title>登录</title>
+</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            -webkit-box-shadow: 12px 17px 24px 5px rgba(0,0,0,0.69);
+            -moz-box-shadow: 12px 17px 24px 5px rgba(0,0,0,0.69);
+            box-shadow: 12px 17px 24px 5px rgba(0,0,0,0.69);
+            width: 380px;
+            padding: 20px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            margin-bottom: 100px;
+            height: 250px;
+        }
+
+        .login-container h2 {
+            margin-top: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            width: 100%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            justify-content: flex-start;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .form-group .password {
+            margin-left: 15px;
+        }
+
+        .form-group button {
+            font-size: 0;
+            width: 49%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: normal;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+    @keyframes rotate {
+        0%{
+            transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+        }
+        100%{
+            transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+        }
+    }
+    .stars{
+        transform: perspective(500px);
+        transform-style: preserve-3d;
+        position: absolute;
+        perspective-origin: 50% 100%;
+        left:50%;
+        animation: rotate 90s infinite linear ;
+        bottom: 0;
+    }
+    .star{
+        width: 2px;
+        height: 2px;
+        background: #f7f7b8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+    }
+    html,
+    body{
+        background: radial-gradient(200% 100% at bottom center,#f7f7b6,#e96f92,#1b2947);
+        background: radial-gradient(220% 105% at top center,#1b2947 10%,#75517d 40%,#e96f92 65%,#f7f7b6);
+        background-attachment: fixed;
+        overflow: hidden;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    </style>
+
+<div class="login-container" id="app">
+    <h2>Login</h2>
+    <div>
+        <div class="form-group">
+            <label >用户名</label>
+            <input type="text" placeholder="User" class="input" v-model="user.username"/>
+        </div>
+        <div class="form-group" >
+            <label >密码</label>
+            <input class="password" type="password" placeholder="Password" class="input" v-model="user.password"/>
+        </div>
+        <div class="form-group" >
+            <button class="login" @click="handlegetById">登录</button>
+            <button class="register" @click="turntoregister">注册</button>
+        </div>
+    </div>
+</div>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="axios-0.18.0.js"></script>
+<script>
+        const vue = new Vue({
+        el: '#app',
+        data: {
+            user:{
+                username:'',
+                password:''
+            }
+        },
+
+        methods: {
+            handlegetById() {
+                axios.post('/user', this.user).then((res) => {
+                    if (res.data.success) {
+                        document.cookie = res.data.data;
+                        if (res.data.errorMsg === '0'){
+                            window.location.href = 'admin.html'
+                        } else {
+                            window.location.href = '购物城.html'
+                        }
+                    } else {
+                        alert(res.data.errorMsg);
+                    }
+                })
+            },
+            turntoregister(){
+              axios.post('/user', this.user).then((res) => {
+                    if (res.data.success) {
+                        document.cookie = res.data.data;
+                        if (res.data.errorMsg === '0'){
+                            window.location.href = 'admin.html'
+                        } else {
+                            window.location.href = '购物城.html'
+                        }
+                    } else {
+                        window.location.href = '注册.html'
+                    }
+                })
+                }
+        },
+    });
+</script>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login!</title>
+    <link rel="stylesheet" href="css/login-page.css">
+    <link rel="stylesheet" href="./elementui/index.css">
+    <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="container" id="app">
+    <!-- Sign In -->
+    <div class="container__form container--signin">
+        <form action="#" class="form" id="form2">
+            <h2 class="form__title">登录</h2>
+            <input type="text" placeholder="User" class="input" v-model="user.username"/>
+            <input type="password" placeholder="Password" class="input" v-model="user.password"/>
+            <button class="btn" @click="handlegetById">Sign In</button>
+        </form>
+    </div>
+    <div class="overlay__panel overlay--right">
+        <a class="btn" id="signUp" href="signup.html">Sign Up</a>
+    </div>
+
+</div>
+
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="axios-0.18.0.js"></script>
+
+<script>
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            user:{
+                username:'',
+                password:''
+            }
+        },
+
+        methods: {
+            handlegetById() {
+                axios.post('/user', this.user).then((res) => {
+                    if (res.data.success) {
+                        document.cookie = res.data.data;
+                        if (res.data.errorMsg === '0'){
+                            window.location.href = 'admin.html'
+                        } else {
+                            window.location.href = 'buyer.html'
+                        }
+                    } else {
+                        alert(res.data.errorMsg);
+                    }
+                })
+            }
+        },
+    });
+</script>
+</body>
+</html>

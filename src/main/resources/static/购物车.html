@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物城-购物车</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/cart.css">
+
+</head>
+<body>
+    <script type="text/javascript" src="checkbox.js"></script>
+    <div class="topbar">
+        <div class="container clearfix">
+            <div class="welcome leftfix">
+                <span class="hello">购物城欢迎您</span>
+                <a href="购物城.html" class="back">回到首页</a>
+            </div>
+            <div class="topbar-nav rightfix">
+                <ul class="list clearfix">
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="#">我的购物车</a></li>
+                    <li><a href="#">企业采购</a></li>
+                    <li><a href="#">商家后台</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container clearfix">
+            <div class="logo leftfix">
+                <img src="images/logo2.png" alt="购物城">
+            </div>
+            <div class="search rightfix">
+                <form action="#">
+                    <input type="text">
+                    <a href="#"></a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="message">
+        <div class="container clearfix">
+            <a class="all-products leftfix" href="#">全部商品</a>
+            <div class="address rightfix">
+                <span>配送至：</span>
+                <form class="rightfix" vaction="#">
+                <input type="text">
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="cart" id="cart">
+        <div class="cart-head">
+            <div class="cart-head-container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox" id="checkAll1">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix">商品选择器</div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">商品名</div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">购买数量</div>
+                        </li>
+                        <li>
+                            <div class="price">单价（￥）</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix">操作</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="app" id="app">
+        <div class="cart-body" id="cartbody">
+            <template>
+            <div class="container clearfix" v-for="container in books":key="container.id">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox"  @change="getsum(parseFloat(container.price).toFixed(2),$event) "name="item">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix"><img :src="container.imgPath" alt="图片" class="book-image"></div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix" >{{ container.name }}</div>
+                        </li>
+                        <li>
+                            <div class="buycount">{{ container.count }}</div>
+                        </li>
+                        <li>
+                            <div class="price">{{ parseFloat(container.price).toFixed(2) }}</div>
+                        </li>
+                        <li>
+                            <div class="delete leftfix"><a href="#" @click="removeCart(container.id)">删除</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            </template>
+
+        </div> 
+    </div>
+        
+        <div class="footer">
+            <div class="container clearfix">
+                <div class="cart-checkbox leftfix">
+                    <input type="checkbox" id="checkAll">
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li>
+                            <div class="picture-column leftfix">商品选择器</div>
+                        </li>
+                        <li>
+                            <div class="goods-name leftfix">
+                                <a href="#">清理购物车</a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="goods-name leftfix">&nbsp</div>
+                        </li>
+                        <li>
+                            <div class="price" id="totalprice"><span>总价：</span>￥0.00</div>
+                        </li>
+                        <li>
+                            <div class="delete">
+                                <a href="#" @click="buy">去结算</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="axios-0.18.0.js"></script>
+<script type="text/javascript" src="checkbox.js"></script>
+<script>
+    var sum = 0.00;
+    var checks = document.querySelectorAll("div.cart-body>div.container>div.cart-checkbox > input");
+    var price = document.querySelectorAll("div.cart-body> div.container>div.list>ul>li>div.price");
+    var result = document.getElementById("totalprice");
+    var cart =document.querySelector("#cart")
+    function totalprice(){
+        let sum = 0.00;
+        for (let i = 0; i < checks.length; i++) {
+            if(checks[i].checked == true){
+                sum += (parseFloat(sum)+  parseFloat(price[i].innerText)).toFixed(2);
+            }
+        }
+        result.innerText = '总价：￥' + sum + '.00元';
+    }
+</script>
+<script>
+    new Vue({
+        el: '#app',
+            data: {
+                search: '',
+                books: [],
+            },
+            created() {
+                this.getAll()
+
+            },
+            methods: {
+
+                getAll(){
+                    axios.get("/cart").then((res)=>{
+                        this.books = res.data.data;
+                        //console.log(res.data.data)
+                    })
+                },
+                getNeedId() {
+                    if (this.search !== ""){
+                        axios.get("/item/" + this.search).then((res) => {
+                            if (res.data.total === 0){
+                                alert("未找到任何商品！")
+                            } else {
+                                this.books = res.data.data;
+                            }
+                        })
+                    } else {
+                        alert("搜索内容不能为空！")
+                        axios.get("/item").then((res)=>{
+                            this.books = res.data.data;
+                        })
+                    }
+                },
+                getsum(price,e){
+                if(e.target.checked)
+                {sum = (parseFloat(sum)+  parseFloat(price)).toFixed(2);}
+                else{
+                    sum = (parseFloat(sum)-  parseFloat(price)).toFixed(2);
+                }
+            
+        
+        
+        result.innerText = '总价：￥' + sum + '元';
+                },
+                removeCart(id) {
+                    axios.delete("/cart/" + id).then((res)=>{
+                        alert(res.data.data)
+                        this.getAll()
+                    }).catch(function (error) {
+                        if (error.response.status === 400) {
+                            alert("未登录，自动跳转到登录页面！")
+                            window.location.href = 'login.html'
+                        }
+                    });
+                },
+                buy() {
+                    axios.get("/order").then((res)=>{
+                        if (res.data.success) {
+                            alert("下单成功！")
+                            window.location.href = 'buyer.html';
+                        } else {
+                            alert(res.data.errorMsg)
+                            this.getAll()
+                        }
+                    })
+                },
+                toExit() {
+                    window.location.href = 'login.html';
+                },
+            }
+         });
+</script>
+</html>

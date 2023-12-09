@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="palettone.shoppingwebsite.mapper.CartMapper">
+    <select id="selectByUserItem" resultType="palettone.shoppingwebsite.entity.Cart">
+        SELECT *
+        FROM  tb_cart
+        WHERE user_id = #{userId} AND item_id = #{itemId}
+    </select>
+
+    <select id="selectByUserId" resultType="palettone.shoppingwebsite.entity.Cart">
+        SELECT *
+        FROM  tb_cart
+        WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteByUserItem">
+        DELETE
+        FROM tb_cart
+        WHERE user_id = #{userId} AND item_id = #{itemId}
+    </delete>
+
+    <select id="selectCountByItemId" resultType="Integer">
+        SELECT SUM(count)
+        FROM  tb_cart
+        WHERE item_id = #{itemId}
+    </select>
+
+</mapper>

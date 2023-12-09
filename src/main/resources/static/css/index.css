@@ -6,8 +6,8 @@
 
 .topbar{
     width: 100%;
-height: 30px;
-background-color: #ECECEC;
+    height: 30px;
+    background-color: #ECECEC;
 }
 .welcome{
     font-size: 0;
@@ -18,7 +18,7 @@ background-color: #ECECEC;
     line-height: 30px;
     color: #666666;
 }
-.welcome .hello{  
+.welcome .hello{
     font-weight: normal;
     margin-right: 28px;
 }
@@ -84,6 +84,9 @@ background-color: #ECECEC;
     background-repeat: no-repeat;
     background-position: 28px 6px;
 }
+.search button:hover{
+cursor: pointer;
+}
 /* #endregion搜索区 */
 /* #region头部导航区 */
 .mainnav{
@@ -108,7 +111,7 @@ background-color: #ECECEC;
     float:left;
     font-size: 16px;
     margin: 0 10px;
-} 
+}
 .mainnav .container .list a{
     color: #333333;
     font-weight: bold;

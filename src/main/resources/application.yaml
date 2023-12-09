@@ -17,7 +17,7 @@ spring:
           starttls:
             enable: true
 mybatis-plus:
-  type-aliases-package: palettone.shoppingwebsite.entity
+  type-aliases-package: top.liukanshan.shoppingwebsite.entity
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false

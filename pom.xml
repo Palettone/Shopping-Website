@@ -8,7 +8,7 @@
         <version>3.1.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>palettone</groupId>
+    <groupId>top.liukanshan</groupId>
     <artifactId>ShoppingWebsite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ShoppingWebsite</name>
@@ -21,6 +21,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+
 
         <!--文档-->
 <!--        <dependency>-->
@@ -80,6 +87,10 @@
             <version>3.0.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,7 +100,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>palettone.shoppingwebsite.ShoppingWebsiteApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

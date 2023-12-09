@@ -2,14 +2,20 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="palettone.shoppingwebsite.mapper.CartMapper">
-    <select id="selectByUserItem" resultType="palettone.shoppingwebsite.entity.Cart">
+<mapper namespace="top.liukanshan.shoppingwebsite.mapper.CartMapper">
+    <select id="selectByUserItem" resultType="top.liukanshan.shoppingwebsite.entity.Cart">
         SELECT *
         FROM  tb_cart
         WHERE user_id = #{userId} AND item_id = #{itemId}
     </select>
 
-    <select id="selectByUserId" resultType="palettone.shoppingwebsite.entity.Cart">
+    <select id="queryUsersBatch" resultType="top.liukanshan.shoppingwebsite.entity.Cart">
+        SELECT *
+        FROM  tb_cart
+        WHERE user_id = #{userId} AND item_id in (${itemId})
+    </select>
+
+    <select id="selectByUserId" resultType="top.liukanshan.shoppingwebsite.entity.Cart">
         SELECT *
         FROM  tb_cart
         WHERE user_id = #{userId}

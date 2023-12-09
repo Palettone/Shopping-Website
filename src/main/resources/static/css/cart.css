@@ -56,7 +56,7 @@
 .logo :hover{
     padding-left: 545px;
 }
-.search form{
+.search{
     height: 36px;
     margin-top: 42px;
     font-size: 0;
@@ -67,7 +67,7 @@
     border: 1px solid #007BFF;
     vertical-align: top;
 }
-.search a{
+.search button{
     display: inline-block;
     width: 80px;
     height: 36px;
@@ -75,6 +75,9 @@
     background-image: url('../images/serch_icon.png');
     background-repeat: no-repeat;
     background-position: 28px 6px;
+}
+.search button:hover{
+    cursor: pointer;
 }
 /* #endregion搜索区 */
 /* #region字体和配送 */
@@ -184,6 +187,14 @@
     line-height: 0;
     vertical-align: text-top;
 }
+.cart-body .buycount{
+    margin-top: 28px;
+    height: 120px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 0;
+    vertical-align: text-top;
+}
 .cart-body .delete{
     font-weight: bold;
     margin-top: 27px;
@@ -236,7 +247,7 @@ display:inline-block;
     font-size: 14px;
     color:#999;
 }
-.footer .list li:nth-child(5) a{
+.footer .list li:nth-child(5) button{
     text-align: center;
     z-index: 3;
     font-size: 14px;
@@ -249,14 +260,18 @@ display:inline-block;
     font-size: 17px;
     font-weight: bold;
     pointer-events: auto;
+
 }
 /* .footer .list li:nth-child(4) button:hover{
 cursor: pointer; 
 }*/
 .footer .list li:nth-child(5) .delete{
-
     z-index: 2;
     width: 24px;
     height: 60px;
     background-color: #e54346;
+}
+.footer .list li:nth-child(5){
+    margin-left: 35px;
+
 }

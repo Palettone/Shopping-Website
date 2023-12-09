@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.liukanshan.shoppingwebsite.mapper.OrderItemMapper">
+<mapper namespace="xyz.palettone.shoppingwebsite.mapper.OrderItemMapper">
     <select id="selectCountByItemId" resultType="Integer">
         SELECT SUM(count)
         FROM  tb_order_item

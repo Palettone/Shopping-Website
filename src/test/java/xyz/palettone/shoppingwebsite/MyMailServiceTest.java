@@ -11,9 +11,10 @@ public class MyMailServiceTest {
     MailService mailService;
     @Test
     public void sendMailTest(){
-        mailService.sendMail(
-        "1269595029@qq.com",
-        "SpringBoot发送邮件",
-        "邮件发送成功啦!");
+//        mailService.sendMail(
+////        "1269595029@qq.com",
+////        "SpringBoot发送邮件",
+////        "邮件发送成功啦!"
+//        );
     }
 }

@@ -213,6 +213,7 @@
                     this.itemid.push(itemid);
                 } else {
                     this.sum = (parseFloat(this.sum) - parseFloat(price).toFixed(2) * parseFloat(count)).toFixed(2);
+                    this.itemid.splice(this.itemid.indexOf(itemid),1);
                 }
 
             },

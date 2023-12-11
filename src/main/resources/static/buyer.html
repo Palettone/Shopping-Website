@@ -3,31 +3,77 @@
 <head>
     <meta charset="utf-8">
     <title>购买页面</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/buyer.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-<div id="app">
-    <div class="header">
-        <input v-model="search" placeholder="搜索商品名" class="search-input">
-        <button @click="getNeedId" class="type-button">搜索</button>
-        <button @click="toCart" class="type-button">打开购物车</button>
-        <button @click="toExit" class="type-button">登出</button>
-    </div>
-    <template>
-    <div class="book-list">
-        <div class="book" v-for="book in books" :key="book.id">
-            <img :src="book.imgPath" alt="图片" class="book-image">
-            <div class="book-info">
-                <p class="book-name">{{ book.name }}</p>
-                <p class="book-number">剩余数量: {{ book.count }}</p>
-                <p class="book-number">价格: {{ book.price }}</p>
-                <button @click="addCart(book.id)" class="type-button">加入购物车</button>
+    <div class="app" id="app">
+        <div class="topbar">
+            <div class="container clearfix">
+                <div class="welcome leftfix">
+                    <span class="hello">购物城欢迎您</span>
+                    <span></span>
+                    <a href="登录.html" class="login">登出</a>
+                    <a href="购物城.html" class="register">返回首页</a>
+                </div>
+                <div class="topbar-nav rightfix">
+                    <ul class="list clearfix">
+                        <li><a href="#">我的订单</a></li>
+                        <li><a href="购物车.html">我的购物车</a></li>
+                        <li><a href="#">企业采购</a></li>
+                        <li><a href="#">商家后台</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <div class="header">
+            <div class="container clearfix">
+                <div class="logo leftfix">
+                    <img src="images/logo2.png" alt="购物城">
+                </div>
+                <div class="search rightfix">
+                    <input v-model="search" placeholder="搜索商品名" class="search-input">
+                    <button class="search-button" @click="getNeedId" class="type-button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="mainnav">
+            <div class="container clearfix">
+                <div class="alltypes leftfix">
+                    全部商品分类
+                </div>
+                <div class="list leftfix clearfix">
+                    <ul>
+                        <li><a href="#">优惠券</a></li>
+                        <li><a href="#">家电</a></li>
+                        <li><a href="#">生鲜</a></li>
+                        <li><a href="#">plus会员</a></li>
+                        <li><a href="#">进口好物</a></li>
+                        <li><a href="#">品牌闪购</a></li>
+                        <li><a href="#">拍卖</a></li>
+                        <li><a href="#">五金店</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <template>
+            <div class="container">
+                <div class="book-list">
+                    <div class="book" v-for="book in books" :key="book.id">
+                        <img :src="book.imgPath" alt="图片" class="book-image">
+                        <div class="book-info">
+                            <p class="book-name">{{ book.name }}</p>
+                            <p class="book-number">剩余数量: {{ book.count }}</p>
+                            <p class="book-number">价格: {{ book.price }}</p>
+                            <button @click="addCart(book.id)" class="type-button">加入购物车</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
-    </template>
-</div>
 
 <script src="vue.js" type="text/javascript" charset="utf-8"></script>
 <script src="axios-0.18.0.js"></script>
@@ -36,7 +82,78 @@
             el: '#app',
             data: {
                 search: '',
-                books: [],
+                books: [
+    {
+        "id": 6,
+        "name": "cup",
+        "price": 1.11,
+        "imgPath": "./img/1.jpg",
+        "count": 1
+    },
+    {
+        "id": 7,
+        "name": "baby cloth",
+        "price": 45,
+        "imgPath": "./img/2.jpg",
+        "count": 2
+    },
+    {
+        "id": 8,
+        "name": "baby pants",
+        "price": 23,
+        "imgPath": "./img/3.jpg",
+        "count": 9
+    },
+    {
+        "id": 9,
+        "name": "serum",
+        "price": 44,
+        "imgPath": "./img/4.jpg",
+        "count": 9
+    },
+    {
+        "id": 10,
+        "name": "stero",
+        "price": 120,
+        "imgPath": "./img/5.jpg",
+        "count": 431
+    },
+    {
+        "id": 11,
+        "name": "laptop",
+        "price": 5000,
+        "imgPath": "./img/6.jpg",
+        "count": 34
+    },
+    {
+        "id": 12,
+        "name": "orange",
+        "price": 13.99,
+        "imgPath": "./img/7.jpg",
+        "count": 76
+    },
+    {
+        "id": 13,
+        "name": "outfit",
+        "price": 129.88,
+        "imgPath": "./img/8.jpg",
+        "count": 2
+    },
+    {
+        "id": 14,
+        "name": "yoko",
+        "price": 83.33,
+        "imgPath": "./img/9.jpg",
+        "count": 0
+    },
+    {
+        "id": 15,
+        "name": "iPhone",
+        "price": 12999,
+        "imgPath": "./img/10.jpg",
+        "count": 89
+    }
+],
             },
             created() {
                 this.getAll()
@@ -83,6 +200,7 @@
                 },
             }
          });
+         
 </script>
 </body>
 </html>

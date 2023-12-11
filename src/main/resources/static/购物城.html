@@ -15,7 +15,7 @@
     <div class="container clearfix">
         <div class="welcome leftfix">
             <span class="hello">购物城欢迎您</span>
-            <span>请</span>
+            <span></span>
             <a href="登录.html" class="login">登录</a>
             <a href="注册.html" class="register">免费注册</a>
         </div>
@@ -189,13 +189,13 @@
                 if (this.search !== ""){
                     axios.get("/item/" + this.search).then((res) => {
                         if (res.data.total === 0){
-                            alert("未找到任何商品！")
+                            alert("请在“全部商品一览”界面搜索商品全名")
                         } else {
-                            this.books = res.data.data;
+                            alert("请在“全部商品一览”界面搜索商品全名")
                         }
                     })
                 } else {
-                    alert("搜索内容不能为空！")
+                    alert("请在“全部商品一览”界面搜索商品全名")
                     axios.get("/item").then((res)=>{
                         this.books = res.data.data;
                     })

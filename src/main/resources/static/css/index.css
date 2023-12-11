@@ -156,7 +156,7 @@ cursor: pointer;
     border-radius: 25px;
     margin: 10px 20px;
     margin-right: 0;
-    transition: margin-top 1s;
+    transition: margin-top 0.7s;
 }
 .recommend1{
     background-image: url('../images/recommend1.jpg');
@@ -186,7 +186,7 @@ cursor: pointer;
     background-size: cover;
 }
 .recommend :hover{
-    margin-top: 0px;
+    margin-top: 5px;
 }
 /* #endregion商品推荐区 */
 /* #region底部日历卡片 */
@@ -224,13 +224,15 @@ cursor: pointer;
 
 }
 .all-products{
+    border-radius: 5px;
     height: 158px;
     width: 290px;
-    background-color: rgb(235, 186, 96);
+    background-color: rgb(214, 169, 84);
     text-align: center;
 }
 .all-products a{
-    line-height: 158px;
+    display: block;
+    padding-top: 54px;
     font-size: 30px;
     font-weight: 550;
     color: white;

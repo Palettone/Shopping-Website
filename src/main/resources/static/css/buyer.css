@@ -15,7 +15,20 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+.mainnav .container .list ul li{
+border-radius: 0px;
+background-color: #ECECEC;
+margin: 0 0px;
+padding: 0 30px;
+font-weight: bold;
 
+}
+.mainnav .list ul li:hover{
+    background-color: #98bfe9;
+    }
+    .mainnav .list ul button:hover{
+        background-color: #98bfe9;
+        }
 .book button{
     font-size: 14px;
     background-color: white;

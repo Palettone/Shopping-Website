@@ -58,6 +58,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 return Result.fail("库存不足");
             }
             item.setCount(item.getCount() - cart.getCount());
+            item.setSold(cart.getCount());
             itemMapper.updateById(item);
             OrderItem orderItem = new OrderItem();
             orderItem.setItemId(item.getId());

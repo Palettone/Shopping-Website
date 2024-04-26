@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>购买页面</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/buyer.css">
+
     <link rel="stylesheet" href="css/index.css">
+   <link rel="stylesheet" href="css/buyer.css">
 </head>
 
 <body>
@@ -46,14 +47,13 @@
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
-                        <li><a href="#">优惠券</a></li>
-                        <li><a href="#">家电</a></li>
-                        <li><a href="#">生鲜</a></li>
-                        <li><a href="#">plus会员</a></li>
-                        <li><a href="#">进口好物</a></li>
-                        <li><a href="#">品牌闪购</a></li>
-                        <li><a href="#">拍卖</a></li>
-                        <li><a href="#">五金店</a></li>
+                        <li><button @click="setTag('')" ><a>全部</a></button></li>
+                        <li><button @click="setTag('grocery')" ><a>生活用品</a></button></li>
+                        <li><button @click="setTag('cloth')" ><a>服饰</a></button></li>
+                        <li><button @click="setTag('beauty')" ><a>美妆</a></button></li>
+                        <li><button @click="setTag('fruit')" ><a>水果</a></button></li>
+                        <li><button @click="setTag('technical')" ><a>科技产品</a></button></li>
+
                     </ul>
                 </div>
             </div>
@@ -61,9 +61,9 @@
         <template>
             <div class="container">
                 <div class="book-list">
-                    <div class="book" v-for="book in books" :key="book.id">
+                    <div class="book" v-for="book in filteredBooks" :key="book.id" >
                         <img :src="book.imgPath" alt="图片" class="book-image">
-                        <div class="book-info">
+                        <div  class="book-info">
                             <p class="book-name">{{ book.name }}</p>
                             <p class="book-number">剩余数量: {{ book.count }}</p>
                             <p class="book-number">价格: {{ book.price }}</p>
@@ -81,6 +81,7 @@
     new Vue({
             el: '#app',
             data: {
+                tag:'',
                 search: '',
                 books: [
     {
@@ -88,21 +89,23 @@
         "name": "cup",
         "price": 1.11,
         "imgPath": "./img/1.jpg",
-        "count": 1
+        "count": 1,
+        "tag": "grocery"
     },
     {
         "id": 7,
         "name": "baby cloth",
         "price": 45,
         "imgPath": "./img/2.jpg",
-        "count": 2
+        "count": 2,
+        "tag": "cloth"
     },
     {
         "id": 8,
         "name": "baby pants",
         "price": 23,
         "imgPath": "./img/3.jpg",
-        "count": 9
+        "count": 9,
     },
     {
         "id": 9,
@@ -155,10 +158,25 @@
     }
 ],
             },
+            computed: {
+    filteredBooks() {
+        // 如果 this.tag 为空，则返回所有书籍
+        if (!this.tag) {
+            return this.books;
+        } else {
+            // 否则根据 this.tag 过滤书籍
+            return this.books.filter(book => book.tag === this.tag);
+        }
+    }
+},
             created() {
                 this.getAll()
             },
             methods: {
+                setTag(tag){
+                    console.log(tag);
+                    this.tag=tag;
+                },
                 getAll(){
                     axios.get("/item").then((res)=>{
                         this.books = res.data.data;

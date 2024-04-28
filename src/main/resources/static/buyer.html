@@ -47,12 +47,13 @@
                 </div>
                 <div class="list leftfix clearfix">
                     <ul>
-                        <li><button @click="setTag('')" ><a>全部</a></button></li>
-                        <li><button @click="setTag('grocery')" ><a>生活用品</a></button></li>
+                        <li v-for="tag in tags"><button @click="setTag(tag)" ><a>{{tag}}</a></button></li>
+                        <!-- <li><button @click="setTag('')" ><a>全部</a></button></li> -->
+                        <!-- <li><button @click="setTag('grocery')" ><a>生活用品</a></button></li>
                         <li><button @click="setTag('cloth')" ><a>服饰</a></button></li>
                         <li><button @click="setTag('beauty')" ><a>美妆</a></button></li>
                         <li><button @click="setTag('fruit')" ><a>水果</a></button></li>
-                        <li><button @click="setTag('technical')" ><a>科技产品</a></button></li>
+                        <li><button @click="setTag('technical')" ><a>科技产品</a></button></li> -->
 
                     </ul>
                 </div>
@@ -81,7 +82,19 @@
     new Vue({
             el: '#app',
             data: {
-                tag:'',
+                tags:[
+                     "All",
+                    "Cloth",
+                    "Grocery",
+                    "Beauty",
+                    "Fruit",
+                    "Technical"
+
+                
+                ],
+                   
+                
+                tag:'All',
                 search: '',
                 books: [
     {
@@ -90,7 +103,7 @@
         "price": 1.11,
         "imgPath": "./img/1.jpg",
         "count": 1,
-        "tag": "grocery"
+        "tag": "Grocery"
     },
     {
         "id": 7,
@@ -98,7 +111,7 @@
         "price": 45,
         "imgPath": "./img/2.jpg",
         "count": 2,
-        "tag": "cloth"
+        "tag": "Cloth"
     },
     {
         "id": 8,
@@ -161,7 +174,7 @@
             computed: {
     filteredBooks() {
         // 如果 this.tag 为空，则返回所有书籍
-        if (!this.tag) {
+        if (this.tag === 'All') {
             return this.books;
         } else {
             // 否则根据 this.tag 过滤书籍
@@ -180,6 +193,10 @@
                 getAll(){
                     axios.get("/item").then((res)=>{
                         this.books = res.data.data;
+                        //console.log(res.data.data)
+                    })
+                    axios.get("/item/tags").then((res)=>{
+                        this.tags = res.data.data;
                         //console.log(res.data.data)
                     })
                 },

@@ -30,5 +30,12 @@ public class UserController {
     @GetMapping
     public Result getUsers() {
         return userService.getUsers();
+
+
+    }
+
+    @DeleteMapping
+    public Result resetPsd(@RequestBody String username){
+        return userService.resetPsd(username);
     }
 }

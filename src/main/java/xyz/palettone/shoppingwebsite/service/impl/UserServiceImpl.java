@@ -55,4 +55,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result getUsers() {
         return Result.ok(userMapper.selectList(null));
     }
+
+    @Override
+    public Result resetPsd(String username) {
+        userMapper.resetPsdByName(username);
+        return Result.ok("重置成功");
+    }
 }

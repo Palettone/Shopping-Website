@@ -11,4 +11,5 @@ public interface UserService extends IService<User> {
     Result register(User user);
 
     Result getUsers();
+    Result resetPsd(String username);
 }

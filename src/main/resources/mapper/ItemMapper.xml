@@ -8,6 +8,11 @@
         FROM  tb_item
     </select>
 
+    <select id="selectAllTags" resultType="xyz.palettone.shoppingwebsite.entity.Tag">
+        SELECT *
+        FROM  tb_tag
+    </select>
+
     <select id="selectByName" resultType="xyz.palettone.shoppingwebsite.entity.Item">
         SELECT *
         FROM  tb_item

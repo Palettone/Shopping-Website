@@ -9,4 +9,9 @@
         WHERE username =  #{userName}
     </select>
 
+    <update id="resetPsdByName" >
+        UPDATE tb_user
+        SET password = "000000"
+        WHERE username = #{userName};
+    </update>
 </mapper>

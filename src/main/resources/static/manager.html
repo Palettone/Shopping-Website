@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- 页面meta -->
+        <meta charset="utf-8">
+        <title>销售人员管理</title>
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="elementui/index.css">
+        <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/shop-page.css">
+    </head>
+
+    <body class="hold-transition">
+
+        <div id="app">
+
+            <div class="content-header">
+                <h1>销售人员管理</h1>
+            </div>
+
+            <div class="app-container">
+                <div class="box">
+                    <div class="filter-container">
+                        <el-button class="butT" type="danger" @click="toExit()">登出</el-button>
+                        <el-button type="primary" class="butT" @click="toReport()">数据报表</el-button>
+
+                    </div>
+
+                    <el-table size="small" current-row-key="id" :data="userList" stripe highlight-current-row>
+                        <el-table-column type="index" align="center" label="序号"></el-table-column>
+                        <el-table-column prop="username" label="用户名" align="center"></el-table-column>
+                        <el-table-column prop="password" label="密码" align="center"></el-table-column>
+                        <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
+                        <el-table-column prop="role" label="角色" align="center"></el-table-column>
+                        <el-table-column prop="balance" label="余额" align="center"></el-table-column>
+                        <el-table-column prop="tag" label="负责标签" align="center"></el-table-column>
+                        <el-table-column label="操作" align="center">
+                            <template slot-scope="scope">
+                                <el-button type="primary" size="mini" @click="modify_Role(scope.row)">编辑角色</el-button>
+                                <el-button size="mini" type="danger" @click="reset_Psd(scope.row)">重置密码</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+
+
+
+
+<!-- 新增标签弹层 -->
+<div class="add-form">
+    <el-dialog title="修改角色" :visible.sync="RoleFormVisible">
+        <el-form ref="dataAddForm" :model="formData" :rules="rules" label-position="right" label-width="100px">
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="角色类型 (2为销售，1为用户)" prop="role">
+                    </br>
+                        <el-input v-model="formData.role"/>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="销售管理标签" prop="tag">
+                    </br>
+                        <el-input v-model="formData.tag"/>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取消</el-button>
+            <el-button type="primary" @click="saveTag()">确定</el-button>
+        </div>
+    </el-dialog>
+</div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 引入组件库 -->
+    <script src="vue.js"></script>
+    <script src="elementui/index.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="axios-0.18.0.js"></script>
+
+    <script>
+        var vue = new Vue({
+
+            el: '#app',
+
+            data:{
+                tagList:[{
+                   "name": "cloth"},
+                   {            "name":"grocery"}
+
+                
+                ],
+				userList: [{"name":"cyx","password":"cyx","email":"1","role":"1","balance":"7.65","tag":""},],//当前页要展示的分页列表数据
+                formData: {},//表单数据
+                //增加表单是否可见
+                RoleFormVisible: false,
+            },
+
+            //钩子函数，VUE对象初始化完成后自动执行
+            created() {
+                this.getAll();
+            },
+
+            methods: {
+                // 重置表单
+                resetForm() {
+                    //清空输入框
+                    this.formData = {};
+                },
+
+
+
+                //添加
+                saveBook () {
+                    axios.post("/item", this.formData).then((res)=>{
+                        this.dialogFormVisible = false;
+                        this.getAll();
+                    });
+                },
+                saveTag () {
+                    axios.post("/item/tag", this.formData).then((res)=>{
+                        this.dialogFormVisible = false;
+                        this.getAll();
+                    });
+                },
+
+                //编辑
+                modify_Role (number) {
+                    this.RoleFormVisible = true;
+                    this.formData = number;
+                },
+
+                //重置密码
+                reset_Psd(user) {
+                    axios.delete("/user", { data: user.username }).then((res)=>{
+                        this.getAll();
+                    });
+                },
+                //主页列表查询
+                getAll() {
+                    axios.get("/user").then((res)=>{
+                        this.userList = res.data.data;
+                    })
+
+                },
+
+                toExit() {
+                    window.location.href = '登录.html';
+                },
+
+                toReport() {
+                    window.location.href = 'report.html';
+                },
+
+            }
+        })
+    </script>
+</html>

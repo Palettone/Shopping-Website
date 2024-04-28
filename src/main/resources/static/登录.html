@@ -152,8 +152,11 @@
                     if (res.data.success) {
                         document.cookie = res.data.data;
                         if (res.data.errorMsg === '0'){
+                            window.location.href = 'manager.html'
+                        } else if(res.data.errorMsg === '2'){
                             window.location.href = 'admin.html'
-                        } else {
+                        }
+                        else{
                             window.location.href = '购物城.html'
                         }
                     } else {
@@ -166,7 +169,7 @@
                     if (res.data.success) {
                         document.cookie = res.data.data;
                         if (res.data.errorMsg === '0'){
-                            window.location.href = 'admin.html'
+                            window.location.href = 'manager.html'
                         } else {
                             window.location.href = '购物城.html'
                         }

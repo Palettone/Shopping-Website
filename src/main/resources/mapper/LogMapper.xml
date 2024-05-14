@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.palettone.shoppingwebsite.mapper.LogMapper">
+    <insert id="insertLog">
+        INSERT INTO tb_log
+        VALUES(#{username},#{type},#{ip_address},#{datetime})
+    </insert>
+
+    <select id="selectAllLogs" resultType="xyz.palettone.shoppingwebsite.entity.Log">
+        SELECT *
+        FROM  tb_log
+    </select>
+
+    <select id="selectLogByUsername" resultType="xyz.palettone.shoppingwebsite.entity.Log">
+        SELECT *
+        FROM  tb_log
+        WHERE username = #{username}
+    </select>
+
+    <select id="selectAllLogByUsername" resultType="xyz.palettone.shoppingwebsite.entity.Log">
+        SELECT *
+        FROM  tb_log
+        WHERE username = #{username}
+    </select>
+</mapper>

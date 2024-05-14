@@ -69,7 +69,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取消</el-button>
-            <el-button type="primary" @click="saveTag()">确定</el-button>
+            <el-button type="primary" @click="saveRole()">确定</el-button>
         </div>
     </el-dialog>
 </div>
@@ -117,14 +117,9 @@
 
 
                 //添加
-                saveBook () {
-                    axios.post("/item", this.formData).then((res)=>{
-                        this.dialogFormVisible = false;
-                        this.getAll();
-                    });
-                },
-                saveTag () {
-                    axios.post("/item/tag", this.formData).then((res)=>{
+
+                saveRole() {
+                    axios.post("/user/role", this.formData).then((res)=>{
                         this.dialogFormVisible = false;
                         this.getAll();
                     });
@@ -151,6 +146,9 @@
                 },
 
                 toExit() {
+                    axios.get('/log?type=exit'
+                ).then((res)=>{
+                });
                     window.location.href = '登录.html';
                 },
 

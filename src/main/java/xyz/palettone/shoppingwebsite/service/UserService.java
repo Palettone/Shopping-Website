@@ -7,8 +7,14 @@ import xyz.palettone.shoppingwebsite.entity.User;
 
 public interface UserService extends IService<User> {
 
+    Result modifyUser(User user);
+
     Result login(User user, HttpServletResponse response);
     Result register(User user);
+    Result getUserById(Long userId);
+    Result getAddress(String username);
+    Result getWealth(String username);
+    Result getFavouriteTag(String username);
 
     Result getUsers();
     Result resetPsd(String username);

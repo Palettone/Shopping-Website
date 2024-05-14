@@ -10,7 +10,10 @@ import java.util.List;
 @Mapper
 public interface ItemMapper extends BaseMapper<Item> {
     List<Item> selectAll();
-
+    boolean updateById(String tagName, int id);
+    boolean save(String tagName);
     List<Tag> selectAllTags();
     List<Item> selectByName(String itemName);
+
+    boolean removeByName(String tagName);
 }

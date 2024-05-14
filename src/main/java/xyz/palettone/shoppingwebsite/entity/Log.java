@@ -1,21 +1,17 @@
 package xyz.palettone.shoppingwebsite.entity;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-    private Long id;
+public class Log {
     private String username;
-    private String password;
-    private String email;
-    private int role;
-    private BigDecimal balance;
-    private String tag;
-
+    private String action;
+    private String ipAddress;
+    private String time;
 }

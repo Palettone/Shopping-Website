@@ -26,6 +26,7 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements It
     @Override
     public Result getAllTags(){
         List<Tag> allItem = itemMapper.selectAllTags();
+        System.out.println(allItem);
 
         return Result.ok(allItem, (long) allItem.size());
     }
@@ -45,12 +46,19 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements It
         }
     }
 
-
+    @Override
+    public Result modifyTag(Tag tag) {
+        if (itemMapper.updateById(tag.getTag(),tag.getId())) {
+            return Result.ok("修改成功");
+        } else {
+            return Result.fail("修改失败");
+        }
+    }
 
     //todo 未将item改为tag
     @Override
-    public Result insertTag(Item item) {
-        if (save(item)){
+    public Result insertTag(Tag tag) {
+        if (itemMapper.save(tag.getTag())){
             return Result.ok("插入成功");
         } else {
             return Result.fail("插入失败");
@@ -67,10 +75,10 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements It
     }
 
 
-    //不确定是否生效
+    //需要重写
     @Override
     public Result deleteTag(String tag_name) {
-        if (removeById(tag_name)) {
+        if (itemMapper.removeByName(tag_name)) {
             return Result.ok("删除成功");
         } else {
             return Result.fail("删除失败");
@@ -85,12 +93,5 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements It
             return Result.fail("修改失败");
         }
     }
-    @Override
-    public Result modifyTag(Tag tag) {
-        if (updateById(tag)) {
-            return Result.ok("修改成功");
-        } else {
-            return Result.fail("修改失败");
-        }
-    }
+
 }

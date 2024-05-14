@@ -143,7 +143,8 @@
             user:{
                 username:'',
                 password:''
-            }
+            },
+            action:"",
         },
 
         methods: {
@@ -151,6 +152,8 @@
                 axios.post('/user', this.user).then((res) => {
                     if (res.data.success) {
                         document.cookie = res.data.data;
+
+ 
                         if (res.data.errorMsg === '0'){
                             window.location.href = 'manager.html'
                         } else if(res.data.errorMsg === '2'){
@@ -161,6 +164,12 @@
                         }
                     } else {
                         alert(res.data.errorMsg);
+                    }
+                });
+               axios.get('/log?type="login"'
+                ).then((res)=>{
+                    if(res.data.success){
+                        alert("记入日志")
                     }
                 })
             },

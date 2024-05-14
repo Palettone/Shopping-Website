@@ -16,7 +16,7 @@
                 <div class="welcome leftfix">
                     <span class="hello">购物城欢迎您</span>
                     <span></span>
-                    <a href="登录.html" class="login">登出</a>
+                    <a href="登录.html" @click=log_exit() class="login">登出</a>
                     <a href="购物城.html" class="register">返回首页</a>
                 </div>
                 <div class="topbar-nav rightfix">
@@ -45,9 +45,13 @@
                 <div class="alltypes leftfix">
                     全部商品分类
                 </div>
-                <div class="list leftfix clearfix">
+                <div style="width: 800px;" class="list leftfix clearfix">
                     <ul>
-                        <li v-for="tag in tags"><button @click="setTag(tag)" ><a>{{tag}}</a></button></li>
+                        <li><button @click="setTag(favourite_tag)" ><a>猜您喜欢</a></button></li>
+                    </ul> 
+                    <ul>
+
+                        <li v-for="tag in tags"><button @click="setTag(tag.tag)" ><a>{{tag.tag}}</a></button></li>
                         <!-- <li><button @click="setTag('')" ><a>全部</a></button></li> -->
                         <!-- <li><button @click="setTag('grocery')" ><a>生活用品</a></button></li>
                         <li><button @click="setTag('cloth')" ><a>服饰</a></button></li>
@@ -82,6 +86,7 @@
     new Vue({
             el: '#app',
             data: {
+                favourite_tag:"Grocery",
                 tags:[
                      "All",
                     "Cloth",
@@ -92,7 +97,7 @@
 
                 
                 ],
-                   
+                user:{},
                 
                 tag:'All',
                 search: '',
@@ -189,6 +194,20 @@
                 setTag(tag){
                     console.log(tag);
                     this.tag=tag;
+                    axios.get('/log?type='+tag
+                ).then((res)=>{
+                    if(res.data.success){
+                        //alert("浏览商品类别记入日志")
+                    }
+                })
+                },
+                log_exit(){
+                    axios.get('/log?type=exit'
+                ).then((res)=>{
+                    if(res.data.success){
+                        alert("成功登出")
+                    }
+                })
                 },
                 getAll(){
                     axios.get("/item").then((res)=>{
@@ -197,8 +216,17 @@
                     })
                     axios.get("/item/tags").then((res)=>{
                         this.tags = res.data.data;
-                        //console.log(res.data.data)
+                        console.log(res.data.data)
                     })
+                    axios.get("/user/tag").then((res)=>{
+                        user = res.data.data;
+                        console.log(res.data.data)
+                        axios.get("/user/favourite_tag?username="+user.username).then((res)=>{
+                        this.favourite_tag=res.data.data;
+                        console.log(res.data.data)
+                    })
+                    })
+
                 },
                 getNeedId() {
                     if (this.search !== ""){

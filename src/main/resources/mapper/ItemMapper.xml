@@ -13,10 +13,26 @@
         FROM  tb_tag
     </select>
 
+    <update id="updateById" >
+        UPDATE tb_tag
+        SET tag = #{tagName}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="removeByName" >
+        DELETE FROM tb_tag
+        WHERE tag = #{tagName}
+    </delete>
+
+    <insert id="save" >
+        INSERT INTO tb_tag
+        SET tag=#{tagName}
+    </insert>
+
     <select id="selectByName" resultType="xyz.palettone.shoppingwebsite.entity.Item">
         SELECT *
         FROM  tb_item
-        WHERE name = #{itemName}
+        WHERE name = #{tagName}
     </select>
 
 </mapper>

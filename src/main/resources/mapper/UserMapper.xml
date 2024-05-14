@@ -9,6 +9,18 @@
         WHERE username =  #{userName}
     </select>
 
+    <select id="selectUserById" resultType="xyz.palettone.shoppingwebsite.entity.User">
+        SELECT *
+        FROM  tb_user
+        WHERE id =  #{userId}
+    </select>
+
+    <update id="updateById" >
+        UPDATE tb_user
+        SET tag = #{tag}, role=#{role}
+        WHERE id = #{id}
+    </update>
+
     <update id="resetPsdByName" >
         UPDATE tb_user
         SET password = "000000"

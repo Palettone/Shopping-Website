@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Tag {
 
-    private String name;
+    private String tag;
+
+    private int id;
 
 }

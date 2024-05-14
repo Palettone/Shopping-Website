@@ -39,7 +39,7 @@ public class ItemController {
 
     @PostMapping("/tag")
     public Result insertTag(@RequestBody Tag tag){
-        if (tag.getName() != null) {
+        if (tag.getId() != 0) {
             return itemService.modifyTag(tag);
         } else {
             return itemService.insertTag(tag);
@@ -52,8 +52,8 @@ public class ItemController {
     }
 
     @DeleteMapping("/tag")
-    public Result deleteItem(@RequestBody Tag tag){
-        return itemService.deleteTag(tag.getName());
+    public Result deleteTag(@RequestBody Tag tag){
+        return itemService.deleteTag(tag.getTag());
     }
 
     @PutMapping()
@@ -61,7 +61,7 @@ public class ItemController {
         return itemService.modifyItem(item);
     }
 
-    @PutMapping()
+    @PutMapping("/tag")
     public Result modifyTag(@RequestBody Tag tag){
         return itemService.modifyTag(tag);
     }

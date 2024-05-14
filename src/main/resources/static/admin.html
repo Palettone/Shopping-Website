@@ -23,16 +23,16 @@
                 <div class="box">
                     <div class="filter-container">
                         <el-button class="butT" type="danger" @click="toExit()">登出</el-button>
-                        <el-button type="primary" class="butT" @click="toReport()">数据报表</el-button>
                         <el-button type="primary" class="butT" @click="openSave()">新建商品</el-button>
                         <el-button type="primary" class="butT" @click="openSaveTag()">新建标签</el-button>
                     </div>
-
-                    <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                    <el-tag>该类商品销售总额：{{totalPrice}}</el-tag>
+                    <el-table size="small" current-row-key="id" :data=filteredItems stripe highlight-current-row>
                         <el-table-column type="index" align="center" label="序号"></el-table-column>
                         <el-table-column prop="name" label="商品名称" align="center"></el-table-column>
                         <el-table-column prop="price" label="商品价格" align="center"></el-table-column>
                         <el-table-column prop="count" label="库存数量" align="center"></el-table-column>
+                        <el-table-column prop="sold" label="售出数量" align="center"></el-table-column>
                         <el-table-column prop="imgPath" label="商品图片" align="center"></el-table-column>
                         <el-table-column prop="tag" label="商品分类" align="center"></el-table-column>
                         <el-table-column label="操作" align="center">
@@ -45,7 +45,7 @@
 
                     <el-table size="small" current-row-key="id" :data="tagList" stripe highlight-current-row>
                         <el-table-column type="index" align="center" label="序号"></el-table-column>
-                        <el-table-column prop="name" label="标签名称" align="center"></el-table-column>
+                        <el-table-column prop="tag" label="标签名称" align="center"></el-table-column>
 
                         <el-table-column label="操作" align="center">
                             <template slot-scope="scope">
@@ -54,7 +54,15 @@
                             </template>
                         </el-table-column>
                     </el-table>
+                    <h3>用户浏览记录</h3>
+                    <el-table size="small" current-row-key="id" :data="filteredViews" stripe highlight-current-row>
+                        <el-table-column type="index" align="center" label="序号"></el-table-column>
+                        <el-table-column prop="name" label="用户名" align="center"></el-table-column>
+                        <el-table-column prop="itemName" label="商品名称" align="center"></el-table-column>
+                        <el-table-column prop="price" label="商品价格" align="center"></el-table-column>
+                        <el-table-column prop="viewCount" label="浏览量" align="center"></el-table-column>
 
+                    </el-table>
                     <!-- 新增标签弹层 -->
                     <div class="add-form">
                         <el-dialog title="新增商品" :visible.sync="dialogFormVisible">
@@ -96,12 +104,12 @@
                     </div>
 <!-- 新增标签弹层 -->
 <div class="add-form">
-    <el-dialog title="新增商品" :visible.sync="TagFormVisible">
+    <el-dialog title="新增标签" :visible.sync="TagFormVisible">
         <el-form ref="dataAddForm" :model="formData" :rules="rules" label-position="right" label-width="100px">
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="标签名称" prop="name">
-                        <el-input v-model="formData.name"/>
+                    <el-form-item label="标签名称" prop="tag">
+                        <el-input v-model="formData.tag"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -131,23 +139,66 @@
 
             data:{
                 tagList:[{
-                   "name": "cloth"},
-                   {            "name":"grocery"}
+                   "tag": "cloth","id": "1"},
+                   {   "id": "2",         "tag":"grocery"}
 
                 
                 ],
+                viewList:[],
 				dataList: [],//当前页要展示的分页列表数据
                 formData: {},//表单数据
                 dialogFormVisible: false,//增加表单是否可见
                 TagFormVisible: false,
+                user:[],
+                totalPrice:0,
+                filtered:[],
             },
 
             //钩子函数，VUE对象初始化完成后自动执行
             created() {
                 this.getAll();
+
             },
+            computed: {
+    filteredItems() {
+            // 根据 this.tag 过滤书籍
+            return this.dataList.filter(data => data.tag === this.user.tag);
+        
+    },
+    filteredViews() {
+        console.log(this.viewList);
+            /// 使用 filteredItems 过滤 viewList
+        return this.viewList.filter(view => {
+            // 判断当前 view 的 name 是否在 filteredItems 中存在相同的 name
+            return this.filteredItems.some(item => item.name === view.itemName);
+        });
+    }
+        
+    },
+
 
             methods: {
+                getTotalPrice(tag) {
+                    if (!this.dataList || !Array.isArray(this.dataList)) {
+        console.error("dataList未定义或不是数组");
+        return;
+    }
+
+    if (!this.user || !this.user.tag) {
+            console.error("用户或用户标签未定义");
+            return;
+        }
+
+    const filtered = this.dataList.filter(data => data.tag === tag);
+    console.log("过滤后的数据:", filtered); // 调试语句
+    if (filtered.length === 0) {
+        console.warn("没有满足过滤条件的数据");
+        return;
+    }
+                    filtered.forEach(element => {
+                        this.totalPrice+=element.sold*element.price;
+                    });
+},
                 // 重置表单
                 resetForm() {
                     //清空输入框
@@ -171,18 +222,27 @@
                         this.dialogFormVisible = false;
                         this.getAll();
                     });
+                    axios.get('/log?type=save_item'
+                ).then((res)=>{
+                });
                 },
                 saveTag () {
                     axios.post("/item/tag", this.formData).then((res)=>{
                         this.dialogFormVisible = false;
                         this.getAll();
                     });
+                    axios.get('/log?type=save_tag'
+                ).then((res)=>{
+                });
                 },
 
                 //编辑
                 modify_item (item) {
                     this.dialogFormVisible = true;
                     this.formData = item;
+                    axios.get('/log?type=modify_item'
+                ).then((res)=>{
+                });
                 },
 
                 //删除
@@ -190,11 +250,18 @@
                     axios.delete("/item", { data: item }).then((res)=>{
                         this.getAll();
                     });
+                    axios.get('/log?type=delete_item'
+                ).then((res)=>{
+                });
                 },
                 //编辑
                 modify_tag (tag) {
                     this.TagFormVisible = true;
                     this.formData = tag;
+
+                    axios.get('/log?type=modify_tag'
+                ).then((res)=>{
+                });
                 },
 
                 //删除
@@ -202,23 +269,47 @@
                     axios.delete("/item/tag", { data: tag }).then((res)=>{
                         this.getAll();
                     });
+
+                    axios.get('/log?type=delete_tag'
+                ).then((res)=>{
+                });
                 },
                 //主页列表查询
                 getAll() {
                     axios.get("/item").then((res)=>{
-                        this.dataList = res.data.data;
-                    })
-                    axios.get("/item/tags").then((res)=>{
-                        this.tagList = res.data.data;
-                        //console.log(res.data.data)
-                    })
+        this.dataList = res.data.data;
+    });
+    axios.get("/cart/all").then((res)=>{
+                        this.viewList = res.data.data;
+                    });
+    axios.get("/item/tags").then((res)=>{
+        this.tagList = res.data.data;
+        //console.log(res.data.data)
+    });//查询所有标签
+
+    axios.get("/user/tag").then((res)=>{//查询负责人信息，用tag筛选
+        this.user = res.data.data;
+        //console.log(res.data.data)
+
+        // 在这里确保数据都已经获取完成后再调用getTotalPrice方法
+        this.getTotalPrice(this.user.tag);
+    });
                 },
 
                 toExit() {
+                    axios.get('/log?type=exit'
+                ).then((res)=>{
+                    if(res.data.success){
+                        alert("成功登出")
+                    }
+                })
                     window.location.href = '登录.html';
                 },
 
                 toReport() {
+                    axios.get('/log?type=view_report'
+                ).then((res)=>{
+                });
                     window.location.href = 'report.html';
                 },
 

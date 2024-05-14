@@ -12,8 +12,8 @@ public interface ItemService extends IService<Item> {
     public Result getAllTags();
 
     Result insertItem(Item item);
-//    Result insertTag(Tag tag);
-
+    Result insertTag(Tag tag);
+    Result modifyTag(Tag tag);
 
     Result deleteItem(long id);
 
@@ -21,7 +21,7 @@ public interface ItemService extends IService<Item> {
 
     Result modifyItem(Item item);
 
-//    Result modifyTag(Tag tag);
+
 
     Result getItem(String name);
 }
